@@ -122,29 +122,25 @@ class _GPSState extends State<GPS> {
             child: Column(
               children: [
                 Expanded(
-                  child: Container(
-                    child: SizedBox(
-                      width: 200,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          child: Text('REFRESH'),
-                          onPressed: (null),
-                        ),
+                  child: const SizedBox(
+                    width: 200,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        child: Text('REFRESH'),
+                        onPressed: (null),
                       ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    child: SizedBox(
-                      width: 200,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ElevatedButton(
-                          child: Text('SAVE IMAGE'),
-                          onPressed: (null),
-                        ),
+                  child: const SizedBox(
+                    width: 200,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        child: Text('SAVE IMAGE'),
+                        onPressed: (null),
                       ),
                     ),
                   ),
