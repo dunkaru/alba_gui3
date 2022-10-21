@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 import '../constants.dart';
 
@@ -11,6 +13,10 @@ class GPS extends StatefulWidget {
 }
 
 class _GPSState extends State<GPS> {
+  Future<String> readGPSJson() {
+    return rootBundle.loadString('assets/data.json');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
