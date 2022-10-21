@@ -71,31 +71,37 @@ class _GPSState extends State<GPS> {
           Expanded(
             flex: 1,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: const [
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LAT'),
+                    subtitle: Text('DATA'),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LAT DIR'),
+                    subtitle: Text('DATA'),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LONG'),
+                    subtitle: Text('DATA'),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LONG DIR'),
+                    subtitle: Text('DATA'),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('# OF SATS'),
+                    subtitle: Text('DATA'),
                   ),
                 ),
               ],
@@ -115,10 +121,32 @@ class _GPSState extends State<GPS> {
             flex: 1,
             child: Column(
               children: [
-                Container(
-                  child: ElevatedButton(
-                    child: Text('TEST'),
-                    onPressed: (null),
+                Expanded(
+                  child: Container(
+                    child: SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          child: Text('REFRESH'),
+                          onPressed: (null),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: SizedBox(
+                      width: 200,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          child: Text('SAVE IMAGE'),
+                          onPressed: (null),
+                        ),
+                      ),
+                    ),
                   ),
                 )
               ],
