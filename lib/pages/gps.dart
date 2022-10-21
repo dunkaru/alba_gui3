@@ -120,9 +120,9 @@ class _GPSState extends State<GPS> {
           Expanded(
             flex: 1,
             child: Column(
-              children: [
+              children: const [
                 Expanded(
-                  child: const SizedBox(
+                  child: SizedBox(
                     width: 200,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -134,7 +134,7 @@ class _GPSState extends State<GPS> {
                   ),
                 ),
                 Expanded(
-                  child: const SizedBox(
+                  child: SizedBox(
                     width: 200,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
