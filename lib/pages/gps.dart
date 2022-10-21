@@ -14,7 +14,7 @@ class _GPSState extends State<GPS> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.black,
+      //backgroundColor: Colors.grey[800],
       appBar: myAppBar,
       drawer: Drawer(
         backgroundColor: Colors.grey[300],
@@ -72,13 +72,32 @@ class _GPSState extends State<GPS> {
             flex: 1,
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  child: ElevatedButton(
-                    child: Text('TEST'),
-                    onPressed: (null),
+              children: const [
+                Expanded(
+                  child: ListTile(
+                    title: Text('GPS LAT'),
                   ),
-                )
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text('LAT DIR'),
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text('GPS LONG'),
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text('LONG DIR'),
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text('# OF SATS'),
+                  ),
+                ),
               ],
             ),
           ),
@@ -86,11 +105,8 @@ class _GPSState extends State<GPS> {
             flex: 2,
             child: Column(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    child: Text('TEST'),
-                    onPressed: (null),
-                  ),
+                Center(
+                  child: Image.asset('assets/images/placeholder.jpg'),
                 ),
               ],
             ),
