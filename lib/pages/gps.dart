@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
-import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import '../constants.dart';
@@ -13,7 +12,7 @@ class GPS extends StatefulWidget {
 }
 
 class _GPSState extends State<GPS> {
-  Future<String> readGPSJson() {
+  readGPSJson() {
     return rootBundle.loadString('assets/data.json');
   }
 
@@ -29,40 +28,40 @@ class _GPSState extends State<GPS> {
           children: [
             const DrawerHeader(child: Icon(FeatherIcons.activity)),
             ListTile(
-              leading: Icon(FeatherIcons.home),
+              leading: const Icon(FeatherIcons.home),
               title: TextButton(
-                child: Text('ALBATROSS'),
+                child: const Text('ALBATROSS'),
                 onPressed: () {
                   Navigator.pushNamed(context, '/');
                 },
               ),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(FeatherIcons.navigation),
               title: TextButton(child: Text('GPS'), onPressed: (null)),
             ),
             ListTile(
-              leading: Icon(FeatherIcons.wifi),
+              leading: const Icon(FeatherIcons.wifi),
               title: TextButton(
-                child: Text('KIWIX'),
+                child: const Text('KIWIX'),
                 onPressed: () {
                   Navigator.pushNamed(context, '/kiwix');
                 },
               ),
             ),
             ListTile(
-              leading: Icon(FeatherIcons.radio),
+              leading: const Icon(FeatherIcons.radio),
               title: TextButton(
-                child: Text('RADIO'),
+                child: const Text('RADIO'),
                 onPressed: () {
                   Navigator.pushNamed(context, '/radio');
                 },
               ),
             ),
             ListTile(
-              leading: Icon(FeatherIcons.power),
+              leading: const Icon(FeatherIcons.power),
               title: TextButton(
-                child: Text('POWER'),
+                child: const Text('POWER'),
                 onPressed: () {
                   Navigator.pushNamed(context, '/power');
                 },
@@ -131,7 +130,7 @@ class _GPSState extends State<GPS> {
                   child: SizedBox(
                     width: 200,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('REFRESH'),
                         onPressed: (null),
@@ -143,7 +142,7 @@ class _GPSState extends State<GPS> {
                   child: SizedBox(
                     width: 200,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('SAVE IMAGE'),
                         onPressed: (null),

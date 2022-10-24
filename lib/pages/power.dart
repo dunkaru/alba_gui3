@@ -67,35 +67,42 @@ class _POWERState extends State<POWER> {
       ),
       body: Row(
         children: <Widget>[
-          Column(
-            children: [
-              Container(
-                child: ElevatedButton(
-                  child: Text('TEST'),
-                  onPressed: (null),
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: const [
+                Expanded(
+                  child: ListTile(
+                    title: Text('SHUNT VOLTAGE'),
+                    subtitle: Text('DATA'),
+                  ),
                 ),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              Container(
-                child: ElevatedButton(
-                  child: Text('TEST'),
-                  onPressed: (null),
+                Expanded(
+                  child: ListTile(
+                    title: Text('CURRENT'),
+                    subtitle: Text('DATA'),
+                  ),
                 ),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              Container(
-                child: ElevatedButton(
-                  child: Text('TEST'),
-                  onPressed: (null),
+                Expanded(
+                  child: ListTile(
+                    title: Text('POWER'),
+                    subtitle: Text('DATA'),
+                  ),
                 ),
-              )
-            ],
+                Expanded(
+                  child: ListTile(
+                    title: Text('BATTERY %'),
+                    subtitle: Text('DATA'),
+                  ),
+                ),
+                Expanded(
+                  child: ListTile(
+                    title: Text('TIME REMAINING'),
+                    subtitle: Text('DATA'),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
