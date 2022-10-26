@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 
 import '../constants.dart';
+import '../util/parse_json.dart';
 
 class GPS extends StatefulWidget {
   const GPS({super.key});
@@ -151,8 +152,8 @@ class _GPSState extends State<GPS> {
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        child: Text('REFRESH'),
-                        onPressed: (readJson),
+                        child: Text('GET DATA'),
+                        onPressed: readJson,
                       ),
                     ),
                   ),

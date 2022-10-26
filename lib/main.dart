@@ -5,6 +5,7 @@ import 'package:alba_gui2/pages/dashboard.dart';
 import 'package:alba_gui2/pages/kiwix.dart';
 import 'package:alba_gui2/pages/radio.dart';
 import 'package:alba_gui2/pages/power.dart';
+import 'package:alba_gui2/util/parse_json.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/kiwix': (context) => KIWIX(),
         '/radio': (context) => RADIO(),
         '/power': (context) => POWER(),
+        //'/json': (context) => gpsJSON()
       },
     );
   }

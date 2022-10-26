@@ -158,7 +158,12 @@ class _DashboardState extends State<Dashboard> {
                 Container(
                     padding: const EdgeInsets.all(8),
                     color: Colors.grey[300],
-                    child: Text('Test')),
+                    child: ElevatedButton(
+                      child: Text('Test'),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/json');
+                      },
+                    )),
                 Container(
                     padding: const EdgeInsets.all(8),
                     color: Colors.grey[300],
