@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/services.dart';
+import 'dart:convert';
 
 import '../constants.dart';
 
@@ -12,8 +13,26 @@ class GPS extends StatefulWidget {
 }
 
 class _GPSState extends State<GPS> {
-  readGPSJson() {
-    return rootBundle.loadString('assets/data.json');
+  String _lat = '';
+  String _latD = '';
+  String _long = '';
+  String _longD = '';
+  String _date = '';
+  String _time = '';
+  String _sv = '';
+
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/data.json');
+    final data = await json.decode(response);
+    setState(() {
+      _lat = data["lat"];
+      _latD = data["la_dir"];
+      _long = data["long"];
+      _longD = data["ln_dir"];
+      _date = data["date"];
+      _time = data["time"];
+      _sv = data["sv"];
+    });
   }
 
   @override
@@ -78,35 +97,35 @@ class _GPSState extends State<GPS> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
-              children: const [
+              children: [
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LAT'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(_lat),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LAT DIR'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(_latD),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LONG'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(_long),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LONG DIR'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(_longD),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('# OF SATS'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(_sv),
                   ),
                 ),
               ],
@@ -125,7 +144,7 @@ class _GPSState extends State<GPS> {
           Expanded(
             flex: 1,
             child: Column(
-              children: const [
+              children: [
                 Expanded(
                   child: SizedBox(
                     width: 200,
@@ -133,7 +152,7 @@ class _GPSState extends State<GPS> {
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('REFRESH'),
-                        onPressed: (null),
+                        onPressed: (readJson),
                       ),
                     ),
                   ),
