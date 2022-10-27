@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import '../constants.dart';
 
@@ -67,6 +69,15 @@ class _POWERState extends State<POWER> {
       ),
       body: Row(
         children: <Widget>[
+          Expanded(
+            child: Center(
+              child: Container(
+                child: SfSparkLineChart(
+                  data: [1, 3, 4, 2, 5, 10, 8, 4, 2, 1],
+                ),
+              ),
+            ),
+          ),
           Expanded(
             flex: 1,
             child: Column(
