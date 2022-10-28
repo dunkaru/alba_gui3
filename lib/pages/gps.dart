@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
-
+import 'dart:async';
 import '../constants.dart';
 import '../util/parse_json.dart';
 
@@ -14,25 +14,25 @@ class GPS extends StatefulWidget {
 }
 
 class _GPSState extends State<GPS> {
-  String _lat = '';
-  String _latD = '';
-  String _long = '';
-  String _longD = '';
-  String _date = '';
-  String _time = '';
-  String _sv = '';
+  String lat = '';
+  String latD = '';
+  String long = '';
+  String longD = '';
+  String date = '';
+  String time = '';
+  String sv = '';
 
   Future<void> readJson() async {
     final String response = await rootBundle.loadString('assets/data.json');
     final data = await json.decode(response);
     setState(() {
-      _lat = data["lat"];
-      _latD = data["la_dir"];
-      _long = data["long"];
-      _longD = data["ln_dir"];
-      _date = data["date"];
-      _time = data["time"];
-      _sv = data["sv"];
+      lat = data["lat"];
+      latD = data["la_dir"];
+      long = data["long"];
+      longD = data["ln_dir"];
+      date = data["date"];
+      time = data["time"];
+      sv = data["sv"];
     });
   }
 
@@ -102,31 +102,31 @@ class _GPSState extends State<GPS> {
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LAT'),
-                    subtitle: Text(_lat),
+                    subtitle: Text(lat),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LAT DIR'),
-                    subtitle: Text(_latD),
+                    subtitle: Text(latD),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LONG'),
-                    subtitle: Text(_long),
+                    subtitle: Text(long),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LONG DIR'),
-                    subtitle: Text(_longD),
+                    subtitle: Text(longD),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('# OF SATS'),
-                    subtitle: Text(_sv),
+                    subtitle: Text(sv),
                   ),
                 ),
               ],
@@ -153,7 +153,10 @@ class _GPSState extends State<GPS> {
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('GET DATA'),
-                        onPressed: readJson,
+                        onPressed: (() => Timer.periodic(
+                              Duration(seconds: 1),
+                              ((timer) => readJson()),
+                            )),
                       ),
                     ),
                   ),

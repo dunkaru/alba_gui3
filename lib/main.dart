@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         '/kiwix': (context) => KIWIX(),
         '/radio': (context) => RADIO(),
         '/power': (context) => POWER(),
-        //'/json': (context) => gpsJSON()
+        '/json': (context) => gpsJSON()
       },
     );
   }
