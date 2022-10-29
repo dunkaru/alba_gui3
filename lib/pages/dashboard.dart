@@ -169,9 +169,13 @@ class _DashboardState extends State<Dashboard> {
                     color: Colors.grey[300],
                     child: Text('Test')),
                 Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: Text('Test')),
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: TextButton(
+                    child: Text('test'),
+                    onPressed: () => testDirectory(),
+                  ),
+                ),
                 Container(
                     padding: const EdgeInsets.all(8),
                     color: Colors.grey[300],
