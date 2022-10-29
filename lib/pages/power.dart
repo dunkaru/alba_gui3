@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
+import 'dart:async';
 
 import '../constants.dart';
 
@@ -13,6 +16,25 @@ class POWER extends StatefulWidget {
 }
 
 class _POWERState extends State<POWER> {
+  int bus = 0;
+  int power = 0;
+  int supply = 0;
+  int shunt = 0;
+
+  Future<void> readPowerJson() async {
+    final String response =
+        await rootBundle.loadString('assets/power_data.json');
+    final powerData = await json.decode(response);
+    setState(() {
+      bus = powerData['lat'];
+      power = powerData['power'];
+      supply = powerData['supl'];
+      shunt = powerData['shunt'];
+    });
+  }
+
+  List sparkChartData = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,32 +94,30 @@ class _POWERState extends State<POWER> {
           Expanded(
             child: Center(
               child: Container(
-                child: SfSparkLineChart(
-                  data: [1, 3, 4, 2, 5, 10, 8, 4, 2, 1],
-                ),
+                child: SfSparkBarChart(data: [shunt, power, supply, bus]),
               ),
             ),
           ),
           Expanded(
             flex: 1,
             child: Column(
-              children: const [
+              children: [
                 Expanded(
                   child: ListTile(
                     title: Text('SHUNT VOLTAGE'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(shunt.toString()),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('CURRENT'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(bus.toString()),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('POWER'),
-                    subtitle: Text('DATA'),
+                    subtitle: Text(power.toString()),
                   ),
                 ),
                 Expanded(
@@ -110,6 +130,15 @@ class _POWERState extends State<POWER> {
                   child: ListTile(
                     title: Text('TIME REMAINING'),
                     subtitle: Text('DATA'),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: (() => Timer.periodic(
+                          Duration(seconds: 1),
+                          ((timer) => readPowerJson()),
+                        )),
+                    child: Text('GET DATA'),
                   ),
                 ),
               ],
