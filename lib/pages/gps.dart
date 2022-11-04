@@ -25,28 +25,6 @@ class _GPSState extends State<GPS> {
     futureAlbum = fetchAlbum();
   }
 
-  String lat = '';
-  String latD = '';
-  String long = '';
-  String longD = '';
-  String date = '';
-  String time = '';
-  String sv = '';
-
-  Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/data.json');
-    final data = await json.decode(response);
-    setState(() {
-      lat = data["lat"];
-      latD = data["la_dir"];
-      long = data["long"];
-      longD = data["ln_dir"];
-      date = data["date"];
-      time = data["time"];
-      sv = data["sv"];
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,31 +91,95 @@ class _GPSState extends State<GPS> {
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LAT'),
-                    subtitle: Text(lat),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.lat);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LAT DIR'),
-                    subtitle: Text(latD),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot.data!.lat);
+                          return Text(snapshot.data!.latD);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('GPS LONG'),
-                    subtitle: Text(long),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot.data!.lat);
+                          return Text(snapshot.data!.long);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('LONG DIR'),
-                    subtitle: Text(longD),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot.data!.lat);
+                          return Text(snapshot.data!.longD);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('# OF SATS'),
-                    subtitle: Text(sv),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          print(snapshot.data!.lat);
+                          return Text(snapshot.data!.sv);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -164,10 +206,7 @@ class _GPSState extends State<GPS> {
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('GET DATA'),
-                        onPressed: (() => Timer.periodic(
-                              Duration(seconds: 1),
-                              ((timer) => readJson()),
-                            )),
+                        onPressed: null,
                       ),
                     ),
                   ),

@@ -3,8 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Album> fetchAlbum() async {
-  final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+  final response = await http.get(Uri.parse('http://127.0.0.1:5000/gps'));
 
   if (response.statusCode == 200) {
     return Album.fromJson(jsonDecode(response.body));
@@ -14,13 +13,14 @@ Future<Album> fetchAlbum() async {
 }
 
 class Album {
-  final double lat;
+  final String lat;
   final String latD;
-  final double long;
+  final String long;
   final String longD;
   final String date;
   final String time;
-  final int sv;
+  final String sv;
+  final String alt;
 
   const Album({
     required this.lat,
@@ -30,17 +30,19 @@ class Album {
     required this.date,
     required this.time,
     required this.sv,
+    required this.alt,
   });
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
-      lat: json['lat'],
-      latD: json['latD'],
-      long: json['long'],
-      longD: json['longD'],
+      alt: json['alt'],
       date: json['date'],
-      time: json['time'],
+      latD: json['la_dir'],
+      lat: json['lat'],
+      longD: json['ln_dir'],
+      long: json['long'],
       sv: json['sv'],
+      time: json['time'],
     );
   }
 }
