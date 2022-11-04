@@ -3,8 +3,11 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:async';
+import 'package:http/http.dart';
+
 import '../constants.dart';
 import '../util/parse_json.dart';
+import '../util/httpReq.dart';
 
 class GPS extends StatefulWidget {
   const GPS({super.key});
@@ -14,6 +17,14 @@ class GPS extends StatefulWidget {
 }
 
 class _GPSState extends State<GPS> {
+  late Future<Album> futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+    futureAlbum = fetchAlbum();
+  }
+
   String lat = '';
   String latD = '';
   String long = '';
@@ -161,7 +172,7 @@ class _GPSState extends State<GPS> {
                     ),
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: SizedBox(
                     width: 200,
                     child: Padding(
