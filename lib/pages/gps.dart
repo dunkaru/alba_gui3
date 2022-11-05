@@ -132,7 +132,6 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          print(snapshot.data!.lat);
                           return Text(snapshot.data!.long);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');

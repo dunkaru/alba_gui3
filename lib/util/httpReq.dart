@@ -47,16 +47,35 @@ class Album {
   }
 }
 
+Future<AlbumP> fetchAlbumPwr() async {
+  final response = await http.get(Uri.parse('http://127.0.0.1:5000/power'));
 
-       /*    child: FutureBuilder<Album>(
-            future: futureAlbum,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(snapshot.data!.title);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
+  if (response.statusCode == 200) {
+    return AlbumP.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('something fucked up');
+  }
+}
 
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator(); 
-      */
+class AlbumP {
+  final String bus;
+  final String power;
+  final String shunt;
+  final String supl;
+
+  const AlbumP({
+    required this.bus,
+    required this.power,
+    required this.shunt,
+    required this.supl,
+  });
+
+  factory AlbumP.fromJson(Map<String, dynamic> json) {
+    return AlbumP(
+      bus: json['bus'],
+      power: json['power'],
+      shunt: json['shunt'],
+      supl: json['supl'],
+    );
+  }
+}

@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'dart:convert';
 import 'dart:async';
 
+import '../util/httpReq.dart';
 import '../constants.dart';
 
 class POWER extends StatefulWidget {
@@ -16,21 +17,12 @@ class POWER extends StatefulWidget {
 }
 
 class _POWERState extends State<POWER> {
-  int bus = 0;
-  int power = 0;
-  int supply = 0;
-  int shunt = 0;
+  late Future<AlbumP> futureAlbumPwr;
 
-  Future<void> readPowerJson() async {
-    final String response =
-        await rootBundle.loadString('assets/power_data.json');
-    final powerData = await json.decode(response);
-    setState(() {
-      bus = powerData['lat'];
-      power = powerData['power'];
-      supply = powerData['supl'];
-      shunt = powerData['shunt'];
-    });
+  @override
+  void initState() {
+    super.initState();
+    futureAlbumPwr = fetchAlbumPwr();
   }
 
   List sparkChartData = [];
@@ -94,8 +86,9 @@ class _POWERState extends State<POWER> {
           Expanded(
             child: Center(
               child: Container(
-                child: SfSparkBarChart(data: [shunt, power, supply, bus]),
-              ),
+                  child:
+                      null //SfSparkBarChart(data: [shunt, power, supply, bus]),
+                  ),
             ),
           ),
           Expanded(
@@ -105,19 +98,55 @@ class _POWERState extends State<POWER> {
                 Expanded(
                   child: ListTile(
                     title: Text('SHUNT VOLTAGE'),
-                    subtitle: Text(shunt.toString()),
+                    subtitle: FutureBuilder<AlbumP>(
+                      future: futureAlbumPwr,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.shunt);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('CURRENT'),
-                    subtitle: Text(bus.toString()),
+                    subtitle: FutureBuilder<AlbumP>(
+                      future: futureAlbumPwr,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.bus);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
                   child: ListTile(
                     title: Text('POWER'),
-                    subtitle: Text(power.toString()),
+                    subtitle: FutureBuilder<AlbumP>(
+                      future: futureAlbumPwr,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.power);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
@@ -134,10 +163,7 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: (() => Timer.periodic(
-                          Duration(seconds: 1),
-                          ((timer) => readPowerJson()),
-                        )),
+                    onPressed: null,
                     child: Text('GET DATA'),
                   ),
                 ),
