@@ -113,7 +113,6 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          print(snapshot.data!.lat);
                           return Text(snapshot.data!.latD);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -150,7 +149,6 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          print(snapshot.data!.lat);
                           return Text(snapshot.data!.longD);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -169,7 +167,6 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          print(snapshot.data!.lat);
                           return Text(snapshot.data!.sv);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
