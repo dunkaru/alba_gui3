@@ -89,9 +89,9 @@ class _POWERState extends State<POWER> {
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return SfSparkBarChart(data: [
-                      int.parse(snapshot.data!.power),
-                      int.parse(snapshot.data!.shunt),
-                      int.parse(snapshot.data!.bus)
+                      num.parse(snapshot.data!.power),
+                      num.parse(snapshot.data!.shunt),
+                      num.parse(snapshot.data!.bus)
                     ]);
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
