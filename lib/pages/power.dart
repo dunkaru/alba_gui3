@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-import 'package:flutter/services.dart';
-import 'dart:convert';
 import 'dart:async';
 
 import '../util/httpReq.dart';

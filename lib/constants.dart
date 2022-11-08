@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:path/path.dart';
 
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -16,8 +17,13 @@ void testDirectory() {
   files = dir.listSync();
 
   for (FileSystemEntity file in files) {
-    FileStat f1 = file.statSync();
+    //FileStat f1 = file.statSync();
+    File file = new File('D:/---NEW STORAGE HDD---/DND STUFF/Maps');
+    String fileName = file.path.split('/').last;
+
+    print(fileName);
     //print(f1.toString());
+
   }
   print(files);
 }

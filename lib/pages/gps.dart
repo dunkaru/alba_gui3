@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'package:process_run/shell.dart';
 import 'dart:async';
+import 'package:process_run/which.dart';
 
 import '../constants.dart';
 import '../util/httpReq.dart';
+
+var shell = Shell();
 
 class GPS extends StatefulWidget {
   const GPS({super.key});
@@ -198,19 +202,19 @@ class _GPSState extends State<GPS> {
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('GET DATA'),
-                        onPressed: null,
+                        onPressed: (null),
                       ),
                     ),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: SizedBox(
                     width: 200,
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
-                        child: Text('SAVE IMAGE'),
-                        onPressed: (null),
+                        child: Text('LAUNCH APP'),
+                        onPressed: () async => await shell.run('shutdown -r'),
                       ),
                     ),
                   ),
