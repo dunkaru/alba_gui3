@@ -33,7 +33,7 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            const DrawerHeader(child: Icon(FeatherIcons.activity)),
+            DrawerHeader(child: Image.asset('assets/images/ALBA_A.png')),
             ListTile(
               leading: Icon(FeatherIcons.home),
               title: TextButton(child: Text('ALBATROSS'), onPressed: (null)),
