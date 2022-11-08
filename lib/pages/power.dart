@@ -85,10 +85,21 @@ class _POWERState extends State<POWER> {
         children: <Widget>[
           Expanded(
             child: Center(
-              child: Container(
-                  child:
-                      null //SfSparkBarChart(data: [shunt, power, supply, bus]),
-                  ),
+              child: FutureBuilder<AlbumP>(
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return SfSparkBarChart(data: [
+                      int.parse(snapshot.data!.power),
+                      int.parse(snapshot.data!.shunt),
+                      int.parse(snapshot.data!.bus)
+                    ]);
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+
+                  return const CircularProgressIndicator();
+                },
+              ),
             ),
           ),
           Expanded(

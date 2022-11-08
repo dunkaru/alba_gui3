@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'dart:async';
 
 import '../constants.dart';
+import '../util/httpReq.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -11,6 +13,16 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  late Future<Album> futureAlbum;
+  Future<AlbumP>? futureAlbumPwr;
+
+  @override
+  void initState() {
+    super.initState();
+    futureAlbum = fetchAlbum();
+    futureAlbumPwr = fetchAlbumPwr();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,38 +164,125 @@ class _DashboardState extends State<Dashboard> {
               padding: const EdgeInsets.all(8.0),
               children: [
                 Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: Text('Test')),
-                Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: ElevatedButton(
-                      child: Text('Test'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/json');
-                      },
-                    )),
-                Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: Text('Test')),
-                Container(
                   padding: const EdgeInsets.all(8),
                   color: Colors.grey[300],
-                  child: TextButton(
-                    child: Text('test'),
-                    onPressed: () => testDirectory(),
+                  child: ListTile(
+                    title: Text('GPS LAT'),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.lat);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: Text('Test')),
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ListTile(
+                    title: Text('GPS LONG'),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.long);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
+                  ),
+                ),
                 Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: Text('Test')),
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ListTile(
+                    title: Text('TIME'),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.time);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ListTile(
+                    title: Text('POWER'),
+                    subtitle: FutureBuilder<AlbumP>(
+                      future: futureAlbumPwr,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.power);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ListTile(
+                    title: Text('CURRENT'),
+                    subtitle: FutureBuilder<AlbumP>(
+                      future: futureAlbumPwr,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.bus);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ListTile(
+                    title: Text('DATE'),
+                    subtitle: FutureBuilder<Album>(
+                      future: futureAlbum,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.date);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           )
