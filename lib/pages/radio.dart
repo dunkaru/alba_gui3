@@ -71,39 +71,49 @@ class _RADIOState extends State<RADIO> {
         ),
       ),
       body: Row(
+        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          Column(
-            children: [
-              Container(
-                child: ElevatedButton(
-                  child: Text('GQRX - NOAA15'),
-                  onPressed: () async =>
-                      await shell.run('gqrx --c noaa15.conf'),
-                ),
-              )
-            ],
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                Container(
+                  child: ElevatedButton(
+                    child: Text('GQRX - NOAA15'),
+                    onPressed: () async =>
+                        await shell.run('gqrx --c noaa15.conf'),
+                  ),
+                )
+              ],
+            ),
           ),
-          Column(
-            children: [
-              Container(
-                child: ElevatedButton(
-                  child: Text('GQRX - NOAA18'),
-                  onPressed: () async =>
-                      await shell.run('gqrx --c noaa18.conf'),
-                ),
-              )
-            ],
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                Container(
+                  child: ElevatedButton(
+                    child: Text('GQRX - NOAA18'),
+                    onPressed: () async =>
+                        await shell.run('gqrx --c noaa18.conf'),
+                  ),
+                )
+              ],
+            ),
           ),
-          Column(
-            children: [
-              Container(
-                child: ElevatedButton(
-                  child: Text('GQRX - NOAA19'),
-                  onPressed: () async =>
-                      await shell.run('gqrx --c noaa19.conf'),
-                ),
-              )
-            ],
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                Container(
+                  child: ElevatedButton(
+                    child: Text('GQRX - NOAA19'),
+                    onPressed: () async =>
+                        await shell.run('gqrx --c noaa19.conf'),
+                  ),
+                )
+              ],
+            ),
           ),
         ],
       ),
