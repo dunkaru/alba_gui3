@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:process_run/shell.dart';
 import 'dart:async';
-import 'package:process_run/which.dart';
 
 import '../constants.dart';
 import '../util/httpReq.dart';
 
 var shell = Shell();
+var _lat;
+var _long;
 
 class GPS extends StatefulWidget {
   const GPS({super.key});
@@ -95,6 +96,7 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          _lat = snapshot.data!.lat;
                           return Text(snapshot.data!.lat);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -131,6 +133,7 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          _long = snapshot.data!.long;
                           return Text(snapshot.data!.long);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -214,7 +217,8 @@ class _GPSState extends State<GPS> {
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('LAUNCH APP'),
-                        onPressed: () async => await shell.run('shutdown -r'),
+                        onPressed: () async => await shell.run(
+                            'foxtrotgps --lat=$_lat --lon=$_long --fullscreen'),
                       ),
                     ),
                   ),

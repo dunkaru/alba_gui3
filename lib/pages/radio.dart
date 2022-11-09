@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'package:process_run/shell.dart';
 
 import '../constants.dart';
+
+var shell = Shell();
 
 class RADIO extends StatefulWidget {
   const RADIO({super.key});
@@ -73,8 +76,9 @@ class _RADIOState extends State<RADIO> {
             children: [
               Container(
                 child: ElevatedButton(
-                  child: Text('TEST'),
-                  onPressed: (null),
+                  child: Text('GQRX - NOAA15'),
+                  onPressed: () async =>
+                      await shell.run('gqrx --c noaa15.conf'),
                 ),
               )
             ],
@@ -83,8 +87,9 @@ class _RADIOState extends State<RADIO> {
             children: [
               Container(
                 child: ElevatedButton(
-                  child: Text('TEST'),
-                  onPressed: (null),
+                  child: Text('GQRX - NOAA18'),
+                  onPressed: () async =>
+                      await shell.run('gqrx --c noaa18.conf'),
                 ),
               )
             ],
@@ -93,8 +98,9 @@ class _RADIOState extends State<RADIO> {
             children: [
               Container(
                 child: ElevatedButton(
-                  child: Text('TEST'),
-                  onPressed: (null),
+                  child: Text('GQRX - NOAA19'),
+                  onPressed: () async =>
+                      await shell.run('gqrx --c noaa19.conf'),
                 ),
               )
             ],
