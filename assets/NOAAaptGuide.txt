@@ -1,0 +1,26 @@
+NOAA Satellite Image Decoding Guide
+
+Step 1: Satellite Pass Schedule - Open Gpredict to view the NOAA satellite paths and schedule.
+	- Notice which satellite path with be ideal, and make note of which satellite it is (15, 18 or 19).
+	- Make note of what time the pass will begin and the signal will be within range.
+
+Step 2: Signal Receiving - Open GQRX with the corresponding NOAA satellite configuration (15, 18 or 19).
+	- Device Input Settings: [Device: Realtek RTL2838UHID] [Input Rate: Around 1000000 (1.0 Msps)] [Decimation: None]
+	- Select "Load Settings" from the "File" dropdown and select either NOAA 15, 18 or 19.
+		Receiver Options:  [NOAA 15 @ 137.62MHz]  [NOAA 18 @ 137.9125MHz]  [NOAA 19 @ 137.1MHz]
+		[Filter Type/Width: Normal/Wide]  [Mode: WFM Mono]  Input Controls: [Hardware AGC: Off] [LNA: 15-25db]
+	- Press PLAY button in the top left corner when the pass begins.
+	- When Signal appears at the middle of the frequency band, press [rec] in the bottom right "Audio" section.
+	- When Signal strength begins to drop below noise floor, press [rec] again to stop and save the recording.
+
+Step 3 (optional): Noise filtering - Open Audacity and import the WAV file from your latest pass.
+	- Select a portion of audio near the beginning or end of the file (where mostly noise is present)
+		then move mouse over the "Effect" dropdown and select "Noise Removal and Repair" -> "Noise Reduction".
+	- In the next window, select "Get Noise Profile". [Step 1] (This targets the selected audio as noise)
+	- Now, select your entire audio timeline and again select "Effect" vv "Noise Removal and Repair" -> "Noise Reduction".
+	- This time, select "OK" under [Step 2].  (This will apply noise filtering)
+	- Finally, under "Effect" dropdown, mouse over the "Volume and Compression" tab and select "Normalize".  Click "Apply".
+
+Step 4: Image Decoding - Select NOAA-APT to run the image decoding program.
+	- There will now be an image displayed with your surrounding area in view.
+	- If the image is too noisy, go back and repeat Steps 3 and 4 as many times as required.
