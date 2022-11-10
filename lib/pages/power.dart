@@ -23,7 +23,10 @@ class _POWERState extends State<POWER> {
   }
 
   List sparkChartData = [];
-
+  var _power;
+  var _bus;
+  var _current;
+  var _shunt;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,25 +84,6 @@ class _POWERState extends State<POWER> {
       body: Row(
         children: <Widget>[
           Expanded(
-            child: Center(
-              child: FutureBuilder<AlbumP>(
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return SfSparkBarChart(data: [
-                      num.parse(snapshot.data!.power),
-                      num.parse(snapshot.data!.shunt),
-                      num.parse(snapshot.data!.bus)
-                    ]);
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-
-                  return const CircularProgressIndicator();
-                },
-              ),
-            ),
-          ),
-          Expanded(
             flex: 1,
             child: Column(
               children: [
@@ -110,6 +94,7 @@ class _POWERState extends State<POWER> {
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          _shunt = snapshot.data!.shunt;
                           return Text(snapshot.data!.shunt);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -128,6 +113,7 @@ class _POWERState extends State<POWER> {
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          _bus = snapshot.data!.bus;
                           return Text(snapshot.data!.bus);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -146,6 +132,7 @@ class _POWERState extends State<POWER> {
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
+                          _power = snapshot.data!.power;
                           return Text(snapshot.data!.power);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -176,6 +163,21 @@ class _POWERState extends State<POWER> {
                   ),
                 ),
               ],
+            ),
+          ),
+          Expanded(
+            child: Center(
+              child: FutureBuilder<AlbumP>(
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return SfSparkBarChart(data: <int>[_bus, _shunt, _power]);
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+
+                  return const CircularProgressIndicator();
+                },
+              ),
             ),
           ),
         ],
