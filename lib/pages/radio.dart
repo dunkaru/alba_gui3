@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:process_run/shell.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 import '../constants.dart';
 
@@ -14,6 +15,19 @@ class RADIO extends StatefulWidget {
 }
 
 class _RADIOState extends State<RADIO> {
+  String text = '';
+  loadInstruct() async {
+    String instruct = await rootBundle.loadString('assets/NOAAaptGuide.txt');
+    setState(() {
+      text = instruct;
+    });
+  }
+
+  @override
+  void initState() {
+    loadInstruct();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,10 +169,7 @@ class _RADIOState extends State<RADIO> {
               children: [
                 Expanded(
                   flex: 4,
-                  child: Text(
-                    "Instructions go Here",
-                    textAlign: TextAlign.center,
-                  ),
+                  child: Text(text, textAlign: TextAlign.center),
                 ),
               ],
             ),
