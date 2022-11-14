@@ -189,7 +189,7 @@ class _GPSState extends State<GPS> {
             child: Column(
               children: [
                 Center(
-                  child: Image.asset('assets/images/placeholder.jpg'),
+                  child: Image.asset('assets/images/ALBA_A.png'),
                 ),
               ],
             ),
