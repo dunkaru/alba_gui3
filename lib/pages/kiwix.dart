@@ -78,18 +78,34 @@ class _KIWIXState extends State<KIWIX> {
         ),
       ),
       body: Row(
-        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           //first column here
           Expanded(
             flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: const [
-                Expanded(
-                  child: Text('test'),
+            child: GridView.count(
+              childAspectRatio: 4,
+              crossAxisCount: 1,
+              shrinkWrap: true,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: null,
+                    child: Text(
+                      "Start Kiwix",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
                 ),
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: null,
+                      child: Text(
+                        "Stop Kiwix",
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ))
               ],
             ),
           ),
@@ -98,8 +114,6 @@ class _KIWIXState extends State<KIWIX> {
             child: Container(
               //color: Colors.green,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
                     child: ListView.builder(
