@@ -15,8 +15,7 @@ class KIWIX extends StatefulWidget {
 class _KIWIXState extends State<KIWIX> {
   @override
   Widget build(BuildContext context) {
-    var dir =
-        new Directory("C:/Users/Dunca/OneDrive/Documents/School/Capstone");
+    var dir = new Directory("/var/local");
     List contents = dir.listSync();
     for (var fileOrDir in contents) {
       if (fileOrDir is File) {
