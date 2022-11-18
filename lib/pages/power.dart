@@ -28,6 +28,9 @@ class _POWERState extends State<POWER> {
   var _bus;
   var _current;
   var _shunt;
+  late double currentConv;
+  late double shuntDbl;
+  late double powerConv;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,6 +99,7 @@ class _POWERState extends State<POWER> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           _shunt = snapshot.data!.bus;
+                          shuntDbl = (double.parse(_shunt));
                           return Text(snapshot.data!.bus);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -135,6 +139,7 @@ class _POWERState extends State<POWER> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           _power = snapshot.data!.power;
+                          double powerConv = (double.parse(_power) / 1000);
                           return Text(snapshot.data!.power);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -185,7 +190,8 @@ class _POWERState extends State<POWER> {
               child: FutureBuilder<AlbumP>(
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return SfSparkBarChart(data: <int>[_bus, _shunt, _power]);
+                    return SfSparkBarChart(
+                        data: <double>[currentConv, shuntDbl, powerConv]);
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   }
