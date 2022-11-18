@@ -108,13 +108,13 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
-                    title: Text('CURRENT'),
+                    title: Text('CURRENT (mA)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          _bus = snapshot.data!.bus;
-                          return Text(snapshot.data!.bus);
+                          _bus = snapshot.data!.current;
+                          return Text(snapshot.data!.current);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -127,7 +127,7 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
-                    title: Text('POWER'),
+                    title: Text('POWER (mW)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
@@ -146,8 +146,21 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
-                    title: Text('BATTERY %'),
-                    subtitle: Text('DATA'),
+                    title: Text('SUPPLY VOLTAGE (V)'),
+                    subtitle: FutureBuilder<AlbumP>(
+                      future: futureAlbumPwr,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          _power = snapshot.data!.supl;
+                          return Text(snapshot.data!.supl);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+
+                        // By default, show a loading spinner.
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
