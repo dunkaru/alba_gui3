@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'dart:async';
+import 'dart:math';
 
 import '../util/httpReq.dart';
 import '../constants.dart';
@@ -89,13 +90,13 @@ class _POWERState extends State<POWER> {
               children: [
                 Expanded(
                   child: ListTile(
-                    title: Text('SHUNT VOLTAGE'),
+                    title: Text('VOLTAGE'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          _shunt = snapshot.data!.shunt;
-                          return Text(snapshot.data!.shunt);
+                          _shunt = snapshot.data!.bus;
+                          return Text(snapshot.data!.bus);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -113,8 +114,9 @@ class _POWERState extends State<POWER> {
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          _bus = snapshot.data!.current;
-                          return Text(snapshot.data!.current);
+                          var current = snapshot.data!.current;
+                          double currentConv = (double.parse(current) / 1000);
+                          return Text(currentConv.toString());
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
