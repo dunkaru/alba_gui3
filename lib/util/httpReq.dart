@@ -64,19 +64,21 @@ class AlbumP {
   final String supl;
   final String current;
 
-  const AlbumP(
-      {required this.bus,
-      required this.power,
-      required this.shunt,
-      required this.supl,
-      required this.current});
+  const AlbumP({
+    required this.bus,
+    required this.power,
+    required this.shunt,
+    required this.supl,
+    required this.current,
+  });
 
   factory AlbumP.fromJson(Map<String, dynamic> json) {
     return AlbumP(
-        bus: json['bus'],
-        power: json['power'],
-        shunt: json['shunt'],
-        supl: json['supl'],
-        current: json['current']);
+      bus: json['bus'],
+      power: json['power'],
+      shunt: json['shunt'],
+      supl: json['supl'],
+      current: json['current'],
+    );
   }
 }
