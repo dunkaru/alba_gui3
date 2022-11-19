@@ -190,8 +190,8 @@ class _POWERState extends State<POWER> {
               child: FutureBuilder<AlbumP>(
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return SfSparkBarChart(
-                        data: <double>[currentConv, shuntDbl, powerConv]);
+                    List<double> graphData = [currentConv, shuntDbl, powerConv];
+                    return SfSparkBarChart(data: graphData);
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   }
