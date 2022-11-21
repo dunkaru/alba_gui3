@@ -198,7 +198,7 @@ class _POWERState extends State<POWER> {
                     return Text('${snapshot.error}');
                   }
 
-                  return const CircularProgressIndicator();
+                  //return const CircularProgressIndicator();
                 },
               ),
             ),*/
