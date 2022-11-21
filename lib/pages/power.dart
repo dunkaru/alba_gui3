@@ -28,8 +28,9 @@ class _POWERState extends State<POWER> {
   var _bus;
   var _current;
   var _shunt;
+  var _voltage;
   late double currentConv;
-  late double shuntDbl;
+  late double voltageDbl;
   late double powerConv;
   @override
   Widget build(BuildContext context) {
@@ -93,13 +94,13 @@ class _POWERState extends State<POWER> {
               children: [
                 Expanded(
                   child: ListTile(
-                    title: Text('VOLTAGE'),
+                    title: Text('VOLTAGE (V)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          _shunt = snapshot.data!.bus;
-                          shuntDbl = (double.parse(_shunt));
+                          _voltage = snapshot.data!.bus;
+                          voltageDbl = (double.parse(_voltage));
                           return Text(snapshot.data!.bus);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -113,7 +114,7 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
-                    title: Text('CURRENT (mA)'),
+                    title: Text('CURRENT (A)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
@@ -133,14 +134,14 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
-                    title: Text('POWER (mW)'),
+                    title: Text('POWER (W)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           _power = snapshot.data!.power;
                           double powerConv = (double.parse(_power) / 1000);
-                          return Text(snapshot.data!.power);
+                          return Text(powerConv.toString());
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -186,11 +187,12 @@ class _POWERState extends State<POWER> {
             ),
           ),
           Expanded(
-            child: Center(
+            child: SfSparkBarChart(data: sparkChartData[0]),
+            /* child: Center(
               child: FutureBuilder<AlbumP>(
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<double> graphData = [currentConv, shuntDbl, powerConv];
+                    List<double> graphData = [currentConv, voltageDbl, powerConv];
                     return SfSparkBarChart(data: graphData);
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
@@ -199,7 +201,7 @@ class _POWERState extends State<POWER> {
                   return const CircularProgressIndicator();
                 },
               ),
-            ),
+            ),*/
           ),
         ],
       ),
