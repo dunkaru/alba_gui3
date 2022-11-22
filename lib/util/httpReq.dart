@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:http/retry.dart';
 
 Future<Album> fetchAlbum() async {
   final response = await http.get(Uri.parse('http://127.0.0.1:5000/gps'));
@@ -8,7 +9,7 @@ Future<Album> fetchAlbum() async {
   if (response.statusCode == 200) {
     return Album.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('something fucked up');
+    throw Exception('HTTP Return code 500, refresh page');
   }
 }
 
@@ -53,7 +54,7 @@ Future<AlbumP> fetchAlbumPwr() async {
   if (response.statusCode == 200) {
     return AlbumP.fromJson(jsonDecode(response.body));
   } else {
-    throw Exception('something fucked up');
+    throw Exception('HTTP Request return code 500, refresh page');
   }
 }
 

@@ -31,6 +31,7 @@ class _RADIOState extends State<RADIO> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: myAppBar,
       drawer: Drawer(
         backgroundColor: Colors.grey[300],
@@ -84,97 +85,101 @@ class _RADIOState extends State<RADIO> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: ElevatedButton(
-                          child: Text('GQRX - NOAA15'),
-                          onPressed: () async =>
-                              await shell.run('gqrx --c noaa15.conf'),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: ElevatedButton(
-                          child: Text("GPREDICT"),
-                          onPressed: (null),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Container(
-                      child: ElevatedButton(
-                        child: Text('GQRX - NOAA18'),
-                        onPressed: () async =>
-                            await shell.run('gqrx --c noaa18.conf'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: ElevatedButton(
-                          child: Text("AUDACITY"),
-                          onPressed: (null),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Container(
-                      child: ElevatedButton(
-                        child: Text('GQRX - NOAA19'),
-                        onPressed: () async =>
-                            await shell.run('gqrx --c noaa19.conf'),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child: ElevatedButton(
-                          onPressed: null,
-                          child: Text("NOAA APT DECODER"),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
                 Expanded(
-                  flex: 4,
-                  child: Text(text, textAlign: TextAlign.center),
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: ElevatedButton(
+                            child: Text('GQRX - NOAA15'),
+                            onPressed: () async =>
+                                await shell.run('gqrx --c noaa15.conf'),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: ElevatedButton(
+                            child: Text("GPREDICT"),
+                            onPressed: (null),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: ElevatedButton(
+                          child: Text('GQRX - NOAA18'),
+                          onPressed: () async =>
+                              await shell.run('gqrx --c noaa18.conf'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: ElevatedButton(
+                            child: Text("AUDACITY"),
+                            onPressed: (null),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: ElevatedButton(
+                          child: Text('GQRX - NOAA19'),
+                          onPressed: () async =>
+                              await shell.run('gqrx --c noaa19.conf'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child: ElevatedButton(
+                            onPressed: null,
+                            child: Text("NOAA APT DECODER"),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Text(text,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

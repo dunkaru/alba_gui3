@@ -172,7 +172,7 @@ class _DashboardState extends State<Dashboard> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(snapshot.data!.lat);
+                          return Text(snapshot.data!.lat.padLeft(2, ' '));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -192,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(snapshot.data!.long);
+                          return Text(snapshot.data!.long.padLeft(2, ' '));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
