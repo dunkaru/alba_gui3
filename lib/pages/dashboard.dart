@@ -234,7 +234,7 @@ class _DashboardState extends State<Dashboard> {
                         if (snapshot.hasData) {
                           var _power = snapshot.data!.power;
                           double powerConv = (double.parse(_power) / 1000);
-                          return Text(powerConv.toString());
+                          return Text(powerConv.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -256,7 +256,7 @@ class _DashboardState extends State<Dashboard> {
                         if (snapshot.hasData) {
                           var current = snapshot.data!.current;
                           double currentConv = (double.parse(current) / 1000);
-                          return Text(currentConv.toString());
+                          return Text(currentConv.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
