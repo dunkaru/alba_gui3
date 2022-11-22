@@ -120,8 +120,8 @@ class _POWERState extends State<POWER> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           var current = snapshot.data!.current;
-                          double currentConv = (double.parse(current) / 1000);
-                          return Text(currentConv.toString());
+                          var currentConv = ((double.parse(current)) / 1000);
+                          return Text(currentConv.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -141,7 +141,7 @@ class _POWERState extends State<POWER> {
                         if (snapshot.hasData) {
                           _power = snapshot.data!.power;
                           double powerConv = (double.parse(_power) / 1000);
-                          return Text(powerConv.toString());
+                          return Text(powerConv.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
