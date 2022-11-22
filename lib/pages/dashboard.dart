@@ -232,7 +232,9 @@ class _DashboardState extends State<Dashboard> {
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(snapshot.data!.power);
+                          var _power = snapshot.data!.power;
+                          double powerConv = (double.parse(_power) / 1000);
+                          return Text(powerConv.toString());
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -252,7 +254,9 @@ class _DashboardState extends State<Dashboard> {
                       future: futureAlbumPwr,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(snapshot.data!.bus);
+                          var current = snapshot.data!.current;
+                          double currentConv = (double.parse(current) / 1000);
+                          return Text(currentConv.toString());
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }

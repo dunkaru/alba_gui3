@@ -23,7 +23,7 @@ class _POWERState extends State<POWER> {
     futureAlbumPwr = fetchAlbumPwr();
   }
 
-  List sparkChartData = [];
+  List<double> sparkChartData = [];
   var _power;
   var _bus;
   var _current;
@@ -187,21 +187,29 @@ class _POWERState extends State<POWER> {
             ),
           ),
           Expanded(
-            child: SfSparkBarChart(data: sparkChartData[0]),
-            /* child: Center(
+            //child: SfSparkBarChart(data: sparkChartData[0]),
+            child: Center(
               child: FutureBuilder<AlbumP>(
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    List<double> graphData = [currentConv, voltageDbl, powerConv];
-                    return SfSparkBarChart(data: graphData);
+                  if (sparkChartData.length == 4) {
+                    List<num> ChartData = List<num>.from(sparkChartData);
+                    SfSparkBarChart(data: ChartData);
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+
+                  throw (e);
+
+                  /*if (snapshot.hasData) 
+                    return SfSparkBarChart(data: );
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   }
 
-                  //return const CircularProgressIndicator();
+                  return const CircularProgressIndicator();*/
                 },
               ),
-            ),*/
+            ),
           ),
         ],
       ),
