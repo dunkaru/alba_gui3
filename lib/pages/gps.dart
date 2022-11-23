@@ -96,8 +96,8 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          _lat = snapshot.data!.lat;
-                          return Text(snapshot.data!.lat);
+                          _lat = double.parse(snapshot.data!.lat);
+                          return Text(_lat.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -133,8 +133,8 @@ class _GPSState extends State<GPS> {
                       future: futureAlbum,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          _long = snapshot.data!.long;
-                          return Text(snapshot.data!.long);
+                          _long = double.parse(snapshot.data!.long);
+                          return Text(_long.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
@@ -205,7 +205,13 @@ class _GPSState extends State<GPS> {
                       padding: EdgeInsets.all(8.0),
                       child: ElevatedButton(
                         child: Text('GET DATA'),
-                        onPressed: (null),
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => GPS()),
+                            (Route<dynamic> route) => false,
+                          );
+                        },
                       ),
                     ),
                   ),

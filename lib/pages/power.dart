@@ -23,15 +23,15 @@ class _POWERState extends State<POWER> {
     futureAlbumPwr = fetchAlbumPwr();
   }
 
-  List<double> sparkChartData = [];
+  @override
   var _power;
   var _bus;
   var _current;
   var _shunt;
   var _voltage;
-  late double currentConv;
-  late double voltageDbl;
-  late double powerConv;
+  double? currentConv;
+  double? voltageDbl;
+  double? powerConv;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +94,7 @@ class _POWERState extends State<POWER> {
               children: [
                 Expanded(
                   child: ListTile(
+                    tileColor: Colors.orange,
                     title: Text('VOLTAGE (V)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
@@ -101,6 +102,7 @@ class _POWERState extends State<POWER> {
                         if (snapshot.hasData) {
                           _voltage = snapshot.data!.bus;
                           voltageDbl = (double.parse(_voltage));
+                          //sparkChartData.insert(0, voltageDbl);
                           return Text(snapshot.data!.bus);
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -114,6 +116,7 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
+                    tileColor: Colors.blue,
                     title: Text('CURRENT (A)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
@@ -121,6 +124,7 @@ class _POWERState extends State<POWER> {
                         if (snapshot.hasData) {
                           var current = snapshot.data!.current;
                           var currentConv = ((double.parse(current)) / 1000);
+                          //sparkChartData.insert(1, currentConv);
                           return Text(currentConv.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -134,6 +138,7 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
+                    tileColor: Colors.red,
                     title: Text('POWER (W)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
@@ -141,6 +146,7 @@ class _POWERState extends State<POWER> {
                         if (snapshot.hasData) {
                           _power = snapshot.data!.power;
                           double powerConv = (double.parse(_power) / 1000);
+                          //sparkChartData.insert(2, powerConv);
                           return Text(powerConv.toStringAsFixed(2));
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
@@ -154,6 +160,7 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
+                    tileColor: Colors.yellow,
                     title: Text('SUPPLY VOLTAGE (V)'),
                     subtitle: FutureBuilder<AlbumP>(
                       future: futureAlbumPwr,
@@ -179,7 +186,13 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: null,
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => POWER()),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
                     child: Text('GET DATA'),
                   ),
                 ),
@@ -190,25 +203,29 @@ class _POWERState extends State<POWER> {
             //child: SfSparkBarChart(data: sparkChartData[0]),
             child: Center(
               child: FutureBuilder<AlbumP>(
-                builder: (context, snapshot) {
-                  if (sparkChartData.length == 4) {
-                    List<num> ChartData = List<num>.from(sparkChartData);
-                    SfSparkBarChart(data: ChartData);
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
+                  future: futureAlbumPwr,
+                  builder: (context, snapshot) {
+                    return SfSparkBarChart(
+                        borderWidth: 50,
+                        data: <double>[
+                          double.parse(snapshot.data!.bus),
+                          double.parse(snapshot.data!.power),
+                          double.parse(snapshot.data!.current),
+                          double.parse(snapshot.data!.supl)
+                        ],
+                        firstPointColor: Colors.green,
+                        lastPointColor: Colors.yellow,
+                        highPointColor: Colors.orange,
+                        lowPointColor: Colors.red);
 
-                  throw (e);
-
-                  /*if (snapshot.hasData) 
+                    /*if (snapshot.hasData) 
                     return SfSparkBarChart(data: );
                   } else if (snapshot.hasError) {
                     return Text('${snapshot.error}');
                   }
 
                   return const CircularProgressIndicator();*/
-                },
-              ),
+                  }),
             ),
           ),
         ],
