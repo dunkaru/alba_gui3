@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'package:process_run/shell.dart';
 
 import '../constants.dart';
+
+var shell = Shell();
 
 class KIWIX extends StatefulWidget {
   const KIWIX({super.key});
@@ -51,9 +54,12 @@ class _KIWIXState extends State<KIWIX> {
                 },
               ),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(FeatherIcons.wifi),
-              title: TextButton(child: Text('KIWIX'), onPressed: (null)),
+              title: TextButton(
+                child: Text('KIWIX'),
+                onPressed: (null),
+              ),
             ),
             ListTile(
               leading: Icon(FeatherIcons.radio),
@@ -89,8 +95,9 @@ class _KIWIXState extends State<KIWIX> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    onPressed: null,
-                    child: Text(
+                    onPressed: () async => await shell.run(
+                        'sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.off && sudo mv /etc/dhcpcd.conf.on /etc/dhcpcd.conf && sudo systemctl restart dhcpcd; sudo systemctl start hostapd dnsmasq'),
+                    child: const Text(
                       "Start Kiwix",
                       style: TextStyle(fontSize: 25),
                     ),
@@ -99,8 +106,9 @@ class _KIWIXState extends State<KIWIX> {
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: null,
-                      child: Text(
+                      onPressed: () async => await shell.run(
+                          'sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.on && sudo mv /etc/dhcpcd.conf.off /etc/dhcpcd.conf; sudo systemnctl restart dhcpcd; sudo systemctl stop hostapd dnsmasq'),
+                      child: const Text(
                         "Stop Kiwix",
                         style: TextStyle(fontSize: 25),
                       ),
