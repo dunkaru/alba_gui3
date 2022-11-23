@@ -95,8 +95,8 @@ class _KIWIXState extends State<KIWIX> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
-                    onPressed: () async => await shell.run(
-                        'sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.off && sudo mv /etc/dhcpcd.conf.on /etc/dhcpcd.conf && sudo systemctl restart dhcpcd; sudo systemctl start hostapd dnsmasq'),
+                    onPressed: () async =>
+                        await shell.run('sh /home/albatross/kiwix-on.sh'),
                     child: const Text(
                       "Start Kiwix",
                       style: TextStyle(fontSize: 25),
@@ -106,8 +106,8 @@ class _KIWIXState extends State<KIWIX> {
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
-                      onPressed: () async => await shell.run(
-                          'sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.on && sudo mv /etc/dhcpcd.conf.off /etc/dhcpcd.conf; sudo systemnctl restart dhcpcd; sudo systemctl stop hostapd dnsmasq'),
+                      onPressed: () async =>
+                          await shell.run('sh /home/albatross/kiwix-off.sh'),
                       child: const Text(
                         "Stop Kiwix",
                         style: TextStyle(fontSize: 25),
