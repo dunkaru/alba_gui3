@@ -110,7 +110,7 @@ class _RADIOState extends State<RADIO> {
                         child: Container(
                           child: ElevatedButton(
                             child: Text("GPREDICT"),
-                            onPressed: (null),
+                            onPressed: () async => await shell.run('gpredict'),
                           ),
                         ),
                       ),
@@ -133,7 +133,7 @@ class _RADIOState extends State<RADIO> {
                         child: Container(
                           child: ElevatedButton(
                             child: Text("AUDACITY"),
-                            onPressed: (null),
+                            onPressed: () async => await shell.run('audacity'),
                           ),
                         ),
                       ),
