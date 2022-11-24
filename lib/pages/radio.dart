@@ -171,9 +171,10 @@ class _RADIOState extends State<RADIO> {
                 children: [
                   Expanded(
                     flex: 4,
-                    child: Text(text,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.visible),
+                    child: Text(
+                      text,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ],
               ),
