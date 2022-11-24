@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'dart:async';
-import 'dart:math';
 
 import '../util/httpReq.dart';
 import '../constants.dart';
@@ -205,18 +204,23 @@ class _POWERState extends State<POWER> {
               child: FutureBuilder<AlbumP>(
                   future: futureAlbumPwr,
                   builder: (context, snapshot) {
-                    return SfSparkBarChart(
-                        borderWidth: 50,
-                        data: <double>[
-                          double.parse(snapshot.data!.bus),
-                          double.parse(snapshot.data!.power),
-                          double.parse(snapshot.data!.current),
-                          double.parse(snapshot.data!.supl)
-                        ],
-                        firstPointColor: Colors.green,
-                        lastPointColor: Colors.yellow,
-                        highPointColor: Colors.orange,
-                        lowPointColor: Colors.red);
+                    if (snapshot.hasData) {
+                      return SfSparkBarChart(
+                          borderWidth: 50,
+                          data: <double>[
+                            double.parse(snapshot.data!.bus),
+                            double.parse(snapshot.data!.power),
+                            double.parse(snapshot.data!.current),
+                            double.parse(snapshot.data!.supl)
+                          ],
+                          firstPointColor: Colors.green,
+                          lastPointColor: Colors.yellow,
+                          highPointColor: Colors.orange,
+                          lowPointColor: Colors.red);
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return const CircularProgressIndicator();
 
                     /*if (snapshot.hasData) 
                     return SfSparkBarChart(data: );
