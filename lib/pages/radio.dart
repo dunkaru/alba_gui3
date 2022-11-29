@@ -66,7 +66,7 @@ class _RADIOState extends State<RADIO> {
                 },
               ),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(FeatherIcons.radio),
               title: TextButton(
                 child: Text('RADIO'),
@@ -155,11 +155,12 @@ class _RADIOState extends State<RADIO> {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           child: ElevatedButton(
-                            onPressed: null,
                             child: Text("NOAA APT DECODER"),
+                            onPressed: () async =>
+                                await shell.run('./decode.sh'),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

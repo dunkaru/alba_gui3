@@ -83,3 +83,25 @@ class AlbumP {
     );
   }
 }
+
+Future<AlbumB> fetchAlbumBatt() async {
+  final response = await http.get(Uri.parse('http://127.0.0.1:5000/battery'));
+
+  if (response.statusCode == 200) {
+    return AlbumB.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('HTTP Request return code 500, refresh page');
+  }
+}
+
+class AlbumB {
+  final String voltage;
+
+  const AlbumB({
+    required this.voltage,
+  });
+
+  factory AlbumB.fromJson(Map<String, dynamic> json) {
+    return AlbumB(voltage: json['voltage']);
+  }
+}

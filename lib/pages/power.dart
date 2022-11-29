@@ -15,11 +15,13 @@ class POWER extends StatefulWidget {
 
 class _POWERState extends State<POWER> {
   late Future<AlbumP> futureAlbumPwr;
+  late Future<AlbumB> futureAlbumBatt;
 
   @override
   void initState() {
     super.initState();
     futureAlbumPwr = fetchAlbumPwr();
+    futureAlbumBatt = fetchAlbumBatt();
   }
 
   @override
@@ -179,8 +181,18 @@ class _POWERState extends State<POWER> {
                 ),
                 Expanded(
                   child: ListTile(
-                    title: Text('TIME REMAINING'),
-                    subtitle: Text('DATA'),
+                    title: Text('BATTERY VOLTAGE'),
+                    subtitle: FutureBuilder<AlbumB>(
+                      future: futureAlbumBatt,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Text(snapshot.data!.voltage);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        return const CircularProgressIndicator();
+                      },
+                    ),
                   ),
                 ),
                 Expanded(
