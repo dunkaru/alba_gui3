@@ -213,35 +213,38 @@ class _POWERState extends State<POWER> {
           Expanded(
             //child: SfSparkBarChart(data: sparkChartData[0]),
             child: Center(
-              child: FutureBuilder<AlbumP>(
-                  future: futureAlbumPwr,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return SfSparkBarChart(
-                          borderWidth: 50,
-                          data: <double>[
-                            double.parse(snapshot.data!.bus),
-                            double.parse(snapshot.data!.power),
-                            double.parse(snapshot.data!.current),
-                            double.parse(snapshot.data!.supl)
-                          ],
-                          firstPointColor: Colors.green,
-                          lastPointColor: Colors.yellow,
-                          highPointColor: Colors.orange,
-                          lowPointColor: Colors.red);
+              child: SizedBox(
+                height: 350,
+                child: FutureBuilder<AlbumP>(
+                    future: futureAlbumPwr,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return SfSparkBarChart(
+                            borderWidth: 50,
+                            data: <double>[
+                              double.parse(snapshot.data!.bus),
+                              double.parse(snapshot.data!.power),
+                              double.parse(snapshot.data!.current),
+                              double.parse(snapshot.data!.supl)
+                            ],
+                            firstPointColor: Colors.green,
+                            lastPointColor: Colors.yellow,
+                            highPointColor: Colors.orange,
+                            lowPointColor: Colors.red);
+                      } else if (snapshot.hasError) {
+                        return Text('${snapshot.error}');
+                      }
+                      return const CircularProgressIndicator();
+
+                      /*if (snapshot.hasData) 
+                      return SfSparkBarChart(data: );
                     } else if (snapshot.hasError) {
                       return Text('${snapshot.error}');
                     }
-                    return const CircularProgressIndicator();
-
-                    /*if (snapshot.hasData) 
-                    return SfSparkBarChart(data: );
-                  } else if (snapshot.hasError) {
-                    return Text('${snapshot.error}');
-                  }
-
-                  return const CircularProgressIndicator();*/
-                  }),
+              
+                    return const CircularProgressIndicator();*/
+                    }),
+              ),
             ),
           ),
         ],
