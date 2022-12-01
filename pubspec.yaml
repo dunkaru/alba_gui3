@@ -68,6 +68,7 @@ flutter:
    - assets/images/placeholder.jpg
    - assets/images/ALBA_A.png
    - assets/images/ALBA_FULL.png
+   - assets/images/AlbatrossGPS.png
    - assets/data.json
    - assets/NOAAaptGuide.txt
 
