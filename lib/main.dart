@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Dashboard(),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/gps': (context) => GPS(),
