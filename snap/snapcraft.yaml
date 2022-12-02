@@ -5,7 +5,7 @@ description: Super Cool App that does everything!
 
 confinement: strict
 base: core18
-grade: beta
+grade: stable
 
 slots:
   dbus-albatross-gui: # adjust accordingly to your app name
