@@ -1,0 +1,28 @@
+name: albatross-gui
+version: 0.1.0
+summary: GUI for the Albatross
+description: Super Cool App that does everything!
+
+confinement: strict
+base: core18
+grade: beta
+
+slots:
+  dbus-albatross-gui: # adjust accordingly to your app name
+    interface: dbus
+    bus: session
+    name: org.bar.super_cool_app # adjust accordingly to your app name and
+    
+apps:
+  albatross-gui:
+    command: super_cool_app
+    extensions: [flutter-master] # Where "master" defines which Flutter channel to use for the build
+    plugs:
+    - network
+    slots:
+      - dbus-albatross-gui
+parts:
+  albatross-gui:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart # The main entry-point file of the application
