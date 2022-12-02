@@ -86,88 +86,82 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: Column(
         children: [
-          AspectRatio(
-            aspectRatio: 4,
-            child: SizedBox(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height,
-              child: GridView.count(
-                childAspectRatio: 2,
-                shrinkWrap: true,
-                //primary: false,
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 4,
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: ElevatedButton(
-                      child: Text('GPS'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/gps');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        foregroundColor: Colors.black,
-                      ),
+          SizedBox(
+            height: 150,
+            child: GridView.count(
+              childAspectRatio: 2,
+              shrinkWrap: true,
+              //primary: false,
+              padding: const EdgeInsets.all(20),
+              //crossAxisSpacing: 10,
+              //mainAxisSpacing: 10,
+              crossAxisCount: 4,
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ElevatedButton(
+                    child: Text('GPS'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/gps');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: ElevatedButton(
-                      child: Text('KIWIX'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/kiwix');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        foregroundColor: Colors.black,
-                      ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ElevatedButton(
+                    child: Text('KIWIX'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/kiwix');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.grey[300],
-                    child: ElevatedButton(
-                      child: Text('POWER'),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/power');
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        foregroundColor: Colors.black,
-                      ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ElevatedButton(
+                    child: Text('POWER'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/power');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      color: Colors.grey[300],
-                      child: ElevatedButton(
-                        child: Text('RADIO'),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/radio');
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[300],
-                          foregroundColor: Colors.black,
-                        ),
-                      ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  color: Colors.grey[300],
+                  child: ElevatedButton(
+                    child: Text('RADIO'),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/radio');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      foregroundColor: Colors.black,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Expanded(
+          Container(
             child: GridView.count(
               crossAxisCount: 3,
               childAspectRatio: 4,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              //crossAxisSpacing: 10,
+              //mainAxisSpacing: 10,
               padding: const EdgeInsets.all(8.0),
               children: [
                 Container(

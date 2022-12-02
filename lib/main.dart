@@ -1,6 +1,6 @@
 import 'package:alba_gui2/pages/gps.dart';
 import 'package:flutter/material.dart';
-import 'package:alba_gui2/pages/dashboard.dart';
+import 'package:alba_gui2/pages/dashboard-new.dart';
 import 'package:alba_gui2/pages/kiwix.dart';
 import 'package:alba_gui2/pages/radio.dart';
 import 'package:alba_gui2/pages/power.dart';
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Dashboard(),
+      home: DashboardNew(),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
