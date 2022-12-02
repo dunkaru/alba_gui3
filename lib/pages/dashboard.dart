@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'dart:async';
+import 'package:process_run/shell.dart';
 
 import '../constants.dart';
 import '../util/httpReq.dart';
+
+var shell = Shell();
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -33,7 +36,11 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           // ignore: prefer_const_literals_to_create_immutables
           children: [
-            DrawerHeader(child: Image.asset('assets/images/ALBA_A.png')),
+            DrawerHeader(
+                child: IconButton(
+                    onPressed: () async => await shell
+                        .run('chocolate-doom -iwad /doom-wad/DOOM1.WAD'),
+                    icon: Image.asset('assets/images/ALBA_A.png'))),
             ListTile(
               leading: Icon(FeatherIcons.home),
               title: TextButton(child: Text('ALBATROSS'), onPressed: (null)),
