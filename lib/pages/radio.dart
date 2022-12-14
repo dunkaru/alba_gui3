@@ -6,6 +6,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../constants.dart';
 
 var shell = Shell();
+var shell2 = Shell();
+var shell3 = Shell();
+var shell4 = Shell();
 
 class RADIO extends StatefulWidget {
   const RADIO({super.key});
@@ -110,7 +113,7 @@ class _RADIOState extends State<RADIO> {
                         child: Container(
                           child: ElevatedButton(
                             child: Text("GPREDICT"),
-                            onPressed: () async => await shell.run('gpredict'),
+                            onPressed: () async => await shell2.run('gpredict'),
                           ),
                         ),
                       ),
@@ -133,7 +136,7 @@ class _RADIOState extends State<RADIO> {
                         child: Container(
                           child: ElevatedButton(
                             child: Text("AUDACITY"),
-                            onPressed: () async => await shell.run('audacity'),
+                            onPressed: () async => await shell3.run('audacity'),
                           ),
                         ),
                       ),
@@ -157,7 +160,7 @@ class _RADIOState extends State<RADIO> {
                           child: ElevatedButton(
                             child: Text("NOAA APT DECODER"),
                             onPressed: () async =>
-                                await shell.run('./decode.sh'),
+                                await shell4.run('./decode.sh'),
                           ),
                         ),
                       ),

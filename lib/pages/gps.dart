@@ -7,6 +7,7 @@ import '../constants.dart';
 import '../util/httpReq.dart';
 
 var shell = Shell();
+
 var _lat;
 var _long;
 
