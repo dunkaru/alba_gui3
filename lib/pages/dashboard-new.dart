@@ -39,8 +39,8 @@ class _DashboardNewState extends State<DashboardNew> {
             children: [
               DrawerHeader(
                   child: IconButton(
-                      onPressed: () async => await shell
-                          .run('chocolate-doom -iwad /doom-wad/DOOM1.WAD'),
+                      onPressed: () async => await shell.run(
+                          'cd ~ && chocolate-doom -iwad /doom-wad/DOOM1.WAD'),
                       icon: Image.asset('assets/images/ALBA_A.png'))),
               const ListTile(
                 leading: Icon(FeatherIcons.home),
