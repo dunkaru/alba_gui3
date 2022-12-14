@@ -7,6 +7,7 @@ import '../constants.dart';
 import '../util/httpReq.dart';
 
 var shell = Shell();
+var _lat;
 
 class DashboardNew extends StatefulWidget {
   const DashboardNew({super.key});
@@ -20,7 +21,7 @@ class _DashboardNewState extends State<DashboardNew> {
   Future<AlbumP>? futureAlbumPwr;
 
   @override
-  void initstate() {
+  void initState() {
     super.initState();
     futureAlbum = fetchAlbum();
     futureAlbumPwr = fetchAlbumPwr();
@@ -153,8 +154,8 @@ class _DashboardNewState extends State<DashboardNew> {
                             future: futureAlbum,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-                                return Text(double.parse(snapshot.data!.lat)
-                                    .toStringAsFixed(2));
+                                _lat = double.parse(snapshot.data!.lat);
+                                return Text(_lat.toStringAsFixed(2));
                               } else if (snapshot.hasError) {
                                 return Text('${snapshot.error}');
                               }
@@ -210,7 +211,7 @@ class _DashboardNewState extends State<DashboardNew> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          title: const Text("POWER"),
+                          title: const Text("POWER (W)"),
                           subtitle: FutureBuilder<AlbumP>(
                             future: futureAlbumPwr,
                             builder: (context, snapshot) {
@@ -273,7 +274,7 @@ class _DashboardNewState extends State<DashboardNew> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: ListTile(
-                          title: const Text("CURRENT"),
+                          title: const Text("CURRENT (A)"),
                           subtitle: FutureBuilder<AlbumP>(
                             future: futureAlbumPwr,
                             builder: (context, snapshot) {
